@@ -35,3 +35,39 @@
 
 </form>
 
+<% end %>
+
+ <h1>Currently all ToDos</h1>
+<p>
+  <% @todo.each do |todo| %>
+    <a href="view_swimmers/<%= todo.id%>">
+    <%= todo.user_id %> </a></p>
+  <a href="delete_swimmers/<%= todo.id%>">
+  Delete
+  --
+  <a href="edit_todo/<%= todo.id%>">
+  Edit
+  </a>
+</p>
+<% end %>
+<%@todo.each do |todo|%>
+<h1> <%=todo.user_id%></h1>
+
+<form action="finish_update_todo/<%= todo.id%>">
+  <p>
+    Name:
+    <input type = "text" name = "edit_title" value = "<%= todo.title %>">
+    </p>
+    <p>
+    Email
+    <input type = "text" name = "edit_description" value = "<%= todo.description %>">
+    </p>
+    <p>
+    Password
+    <input type = "text" name = "edit_user_id" value = "<%= todo.user_id %>">
+    </p>
+  <input type = "submit">
+
+</form>
+
+<% end %>

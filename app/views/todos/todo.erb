@@ -1,18 +1,29 @@
 Here is going to be the TODO
 
-<h1>Welcome to you To Do list!</h1>
+<h1>Welcome to your To Do list!</h1>
 
 
-<h3>Enter a Task you would like to complete</h3>
+<h3>Enter a Task you would like to add</h3>
 <p>
-<form action="add_task">
-<input type = "text" name = "title">
-<input type = "text" name = "description">
-<input type = "submit">
-</form>
-</p>
 
+</p>
+<form action="add_task">
+Title<input type = "text" name = "title">
+Description<input type = "text" name = "description">
+<select name="user_for_task">
+    <option>Select a member to task</option> 
+    <% @users.each do |users| %>
+        <option value="<%= users.id %>"><%= users.name %></option>
+   <input type = "submit"> 
+   <% end %>
+ 
+</select>
 </form>
+</body>
+</html>
+</form>
+
+
 </p>
 
 <a href="the_list">View Your List</a>
@@ -20,25 +31,109 @@ Here is going to be the TODO
     <tr>
       <th>Title</th>
       <th>Description</th>
+            <th>Team Member Created</th>
       <th>Completed</th>
+      <th>Delete</th>
+      <th>Team Member Created For</th>
+
+
+
 
 
     </tr>
   </thead>
 
   <tbody>
-  <% @todo.each do |todo| %>
+  <% @todo_user.each do |todo| %>
       <tr>
 
-
-        <td><%= todo.title %></td>
-        <td><%= todo.description   %> </td>
-        <td><%=   %></td>
+      <td> <%= todo.title %> </td>
+      <td> <%= todo.description   %> </td>
+      <td> <%= todo.contributor_name%></td>
+        <td><a href="complete_todo/<%= todo.id%>"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQaSDbB2-_z6rGSMhBzwt5jMlKF4UI92wcmEhfNF1pN86SEr3cKuQ" alt="huh" width="65" height="42" border="0">  </td>
+        <td><a href="delete_todo/<%= todo.id%>">Delete</td>
+        
+        <td><%= todo.name%></td>
          <% end %>
    
-    
+  
         
       </tr>
     
   </tbody>
 </table>
+<h1>Delete a line...Mach 2</h1>
+<p>
+  <% @todo_user.each do |todo| %>
+    <a href="view_todo/<%= todo.id%>">
+    <%= todo.title %> </a></p>
+  
+  Delete
+  --
+  <a href="edit_todo/<%= todo.id%>">
+  Edit
+  </a>
+</p>
+<% end %>
+
+
+
+
+<h1>This is all the users Information, not just you!</h1>
+
+
+<h3>Enter a Task you would like to complete</h3>
+<p>
+
+</p>
+
+
+</p>
+
+<a href="the_list">View Your List</a>
+<form action="add_task">
+<input type = "text" name = "title"> 
+<input type = "text" name = "description">
+<input type = "submit"></form>
+<table border="1">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+            <th>User ID</th>
+      <th>Completed</th>
+
+
+
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @todo_all.each do |todo| %>
+      <tr>
+
+      <td><%= todo.title %> </td>
+      <td><%= todo.description   %></td>
+      <td><%= todo.user_id%></td>
+        <td><a href="complete_todo/<%= todo.id%>">
+<img src="<%=@g%>" alt="huh" width="65" height="42" border="0"></td>
+         <% end %>
+   
+  
+        
+      </tr>
+    
+  </tbody>
+</table>
+<h1>Delete a line...Mach 2</h1>
+<p>
+  <% @todo_all.each do |todo| %>
+    <a href="view_todo/<%= todo.id%>">
+    <%= todo.title %> </a></p>
+  
+  Delete
+  --
+  <a href="edit_todo/<%= todo.id%>">
+  Edit
+  </a>
+</p>
+<% end %>

@@ -1,20 +1,30 @@
+MyApp.before "/logins*" do
+  @user = User.find_by_id(session["user_id"])
+  if @user == nil
+    redirect "/logins/login"
+  end
+end
+
+
 MyApp.get "/" do
 
   erb :"logins/login"  
 end
 
-MyApp.get "/login_user" do
+MyApp.post "/login_user" do
    @user = User.find_by_email(params[:email])
-   
    if @user.password == params[:password]
-
     session["user_id"] = @user.id
-
-
-  erb :"logins/success_login"
+    redirect "/logins/login_welcome/"
   else
   erb :"logins/fail_login"
 end
+end
+
+MyApp.get "/logins/login_welcome/" do
+  @user = User.find_by_id(session["user_id"])
+
+  erb :"logins/login_welcome"
 end
 
 MyApp.get "/logout" do
@@ -39,6 +49,7 @@ MyApp.get "/finish_update_user/:place" do
 end
 MyApp.get "/administrator" do
   @user = User.all
+  @todo = Todo.all
 
   erb :"users/administer"
 end
