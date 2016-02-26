@@ -11,7 +11,7 @@ MyApp.get "/create_user" do
   new_user.password = params[:new_password]
   new_user.save
 
-  erb :"logins/success_login"
+  erb :"logins/login_welcome"
 end
 
 

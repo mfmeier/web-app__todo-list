@@ -1,0 +1,21 @@
+Update <%= @todo.title %>
+
+<form action="finish_update_todo/<%= @todo.id%>">
+  <p>
+    Title:
+    <input type = "text" name = "edit_title" value = "<%= @todo.title %>">
+    </p>
+    <p>
+    Description:
+    <input type = "text" name = "edit_description" value = "<%= @todo.description %>">
+    </p>
+    Contributor ID:
+    <input type = "text" name = "edit_contributor_id" value = "<%= @todo.contributor_id %>">
+    </p>
+    <p>
+    Assigned to ID
+    <input type = "text" name = "edit_user_id" value = "<%= @todo.user_id %>">
+    </p>
+  <input type = "submit">
+
+</form>
