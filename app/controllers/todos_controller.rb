@@ -4,11 +4,12 @@ MyApp.get "/todo/" do
   @users = User.all
     @todo_user = Todo.where("user_id" => @user.id)
     @todo_all = Todo.all
-    binding.pry
-    if @todo_user.completed == true
+    @todo_all.each do |a|
+    if a.completed == true
       @completed_icon = "http://www.clker.com/cliparts/v/c/G/q/s/h/done-button-png-hi.png"
     else
       @completed_icon = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQaSDbB2-_z6rGSMhBzwt5jMlKF4UI92wcmEhfNF1pN86SEr3cKuQ"
+    end
     end
     if @user != nil
         erb :"todos/todo"
@@ -46,13 +47,15 @@ MyApp.get "/todo/the_list" do
 end
 MyApp.get "/todo/complete_todo/:place" do
   @todo = Todo.find_by_id(params[:place])
-  @todo.completed = true
-  @todo.save
-  if @todo != nil
-    redirect "/todo/"
+  
+  if @todo.completed == true
+    @todo.completed = false
   else
-  erb :"todos/task_follower"
+    @todo.completed = true
   end
+  @todo.save
+  
+  redirect "/todo/"
 end
 MyApp.get "/todo/delete_todo/:place" do 
   @todo = Todo.find_by_id(params[:place])
